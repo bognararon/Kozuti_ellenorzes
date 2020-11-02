@@ -1,6 +1,7 @@
 ﻿import fs from "fs";
 import http from "http";
 import url from "url";
+import Megoldás from "./Megoldás";
 
 export default class Content {
     public content(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -17,14 +18,36 @@ export default class Content {
         res.write("<head>");
         res.write("<style>input, pre {font-family:monospace; font-size:1em; font-weight:bold;}</style>");
         res.write("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-        res.write("<title>Jedlik Ts Template</title>");
+        res.write("<title>Közúti ellenőrzés</title>");
         res.write("</head>");
         res.write("<body><form><pre class='m-3'>");
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const params = url.parse(req.url as string, true).query;
 
         // Kezd a kódolást innen -->
+        // 1. feladat
+        const megold: Megoldás = new Megoldás("jarmu.txt");
 
+        // 2. feladat
+        res.write(`2. feladat: Legalább ${megold.dolgozottÓrákSzáma} óra hosszat dolgoztak\n`);
+
+        // 3. feladat
+        const óraStatMap: Map<number, string> = megold.óraStatMap;
+        res.write("3. feladat:\n");
+        for (const [key, value] of óraStatMap) {
+            res.write(`\t${key} óra: ${value}\n`);
+        }
+        // 4. feladat
+        const kategóriaStatMap: Map<string, number> = megold.kategóriaStatMap;
+        res.write("4. feladat:\n");
+        for (const [key, value] of kategóriaStatMap) {
+            res.write(`\t${key}: ${value}\n`);
+        }
+        // 5. feladat
+        res.write(`5. feladat: A leghosszabb forgalommentes időszak: ${megold.leghosszabbForgalommentesIdőszak}\n`);
+
+        // 7. feladat:
+        megold.ellenőrzöttJárművekÁllománybaÍrása("vizsgalt.txt");
 
         // <---- Fejezd be a kódolást
 
