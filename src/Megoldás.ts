@@ -81,6 +81,21 @@ export default class Megoldas {
         return egyezőRendszámok;
     }
 
+    public get ellenőrzöttJárművekKiíratás(): string[] {
+        const ki: string[] = [];
+        let ellenőrzöttJármű: Date = this._járművek[0].áthaladásIdeje;
+        ellenőrzöttJármű.setMinutes(ellenőrzöttJármű.getMinutes() + 5);
+        ki.push(`${this._járművek[0].áthaladásIdejeNullával} ${this._járművek[0].rendszám}`);
+        this._járművek.forEach(i => {
+            if (i.áthaladásIdeje.getTime() > ellenőrzöttJármű.getTime()) {
+                ellenőrzöttJármű = i.áthaladásIdeje;
+                ellenőrzöttJármű.setMinutes(ellenőrzöttJármű.getMinutes() + 5);
+                ki.push(`${i.áthaladásIdejeNullával} ${i.rendszám}`);
+            }
+        });
+        return ki;
+    }
+
     constructor(forrás: string) {
         fs.readFileSync(forrás)
             .toString()

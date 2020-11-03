@@ -49,15 +49,27 @@ export default class Content {
         // 6. feladat
         let inputRendszam: string = params.inputRendszam as string;
         if (inputRendszam.length < 7) {
-            for (let i = 0; i < 7 - inputRendszam.length; i++) {
+            do {
                 inputRendszam += "*";
-            }
+            } while (inputRendszam.length < 7);
         }
         res.write(`6. feladat: Adjon meg egy rendszámot [ 7 karakter legyen, pl.: HU*****]: <input type='text' name='inputRendszam' value='${inputRendszam}' style='max-width:100px;' maxlength="7" onChange='this.form.submit();'>\n`);
         const egyezőRendszámok: string[] = megold.rendszámAzonosítás(inputRendszam);
+        res.write("<textarea rows='10' cols='8'>");
+        for (const i of egyezőRendszámok) {
+            res.write(`${i}\n`);
+        }
+        res.write("</textarea>\n");
 
         // 7. feladat
         megold.ellenőrzöttJárművekÁllománybaÍrása("vizsgalt.txt");
+        const ellenőrzöttJárművek: string[] = megold.ellenőrzöttJárművekKiíratás;
+        res.write("8. feladat: vizsgalt.txt\n");
+        res.write("<textarea rows='10' cols='20'>");
+        for (const i of ellenőrzöttJárművek) {
+            res.write(`${i}\n`);
+        }
+        res.write("</textarea>");
 
         // <---- Fejezd be a kódolást
 
