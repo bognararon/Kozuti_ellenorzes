@@ -46,7 +46,17 @@ export default class Content {
         // 5. feladat
         res.write(`5. feladat: A leghosszabb forgalommentes időszak: ${megold.leghosszabbForgalommentesIdőszak}\n`);
 
-        // 7. feladat:
+        // 6. feladat
+        let inputRendszam: string = params.inputRendszam as string;
+        if (inputRendszam.length < 7) {
+            for (let i = 0; i < 7 - inputRendszam.length; i++) {
+                inputRendszam += "*";
+            }
+        }
+        res.write(`6. feladat: Adjon meg egy rendszámot [ 7 karakter legyen, pl.: HU*****]: <input type='text' name='inputRendszam' value='${inputRendszam}' style='max-width:100px;' maxlength="7" onChange='this.form.submit();'>\n`);
+        const egyezőRendszámok: string[] = megold.rendszámAzonosítás(inputRendszam);
+
+        // 7. feladat
         megold.ellenőrzöttJárművekÁllománybaÍrása("vizsgalt.txt");
 
         // <---- Fejezd be a kódolást

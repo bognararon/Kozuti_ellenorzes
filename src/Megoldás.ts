@@ -65,6 +65,22 @@ export default class Megoldas {
         return "Hiba történt!";
     }
 
+    public rendszámAzonosítás(szűrő: string): string[] {
+        const egyezőRendszámok: string[] = [];
+        for (const i of this._járművek) {
+            let egyezőKarakterek: number = 0;
+            for (let j = 0; j < szűrő.length; j++) {
+                if (i.rendszám[j] == szűrő[j] || szűrő[j] == "*") {
+                    egyezőKarakterek++;
+                }
+            }
+            if (egyezőKarakterek == 7) {
+                egyezőRendszámok.push(i.rendszám);
+            }
+        }
+        return egyezőRendszámok;
+    }
+
     constructor(forrás: string) {
         fs.readFileSync(forrás)
             .toString()
