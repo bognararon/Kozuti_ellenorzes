@@ -51,11 +51,13 @@ export default class Content {
         res.write("\n");
         // 6. feladat
         let inputRendszam: string = params.inputRendszam as string;
+        if (inputRendszam == undefined) inputRendszam = "";
         if (inputRendszam.length < 7) {
             do {
                 inputRendszam += "*";
             } while (inputRendszam.length < 7);
         }
+        inputRendszam = inputRendszam.toUpperCase();
         res.write(`6. feladat: Adjon meg egy rendszámot [7 karakter legyen, pl.: HU*****]: <input type='text' name='inputRendszam' value='${inputRendszam}' style='max-width:100px;' maxlength="7" onChange='this.form.submit();'>\n`);
         const egyezőRendszámok: string[] = megold.rendszámAzonosítás(inputRendszam);
         res.write("<textarea rows='10' cols='8'>");
