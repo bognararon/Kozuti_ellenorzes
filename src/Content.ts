@@ -51,7 +51,6 @@ export default class Content {
         res.write("\n");
         // 6. feladat
         let inputRendszam: string = params.inputRendszam as string;
-        let asd;
         if (inputRendszam.length < 7) {
             do {
                 inputRendszam += "*";
