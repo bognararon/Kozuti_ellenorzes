@@ -70,7 +70,7 @@ export default class Content {
         // 7. feladat
         megold.ellenőrzöttJárművekÁllománybaÍrása("vizsgalt.txt");
         const ellenőrzöttJárművek: string[] = megold.ellenőrzöttJárművekKiíratás;
-        res.write("8. feladat: vizsgalt.txt\n");
+        res.write("7. feladat: vizsgalt.txt\n");
         res.write("<textarea rows='10' cols='20'>");
         for (const i of ellenőrzöttJárművek) {
             res.write(`${i}\n`);
