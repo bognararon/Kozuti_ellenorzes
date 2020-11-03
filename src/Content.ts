@@ -29,7 +29,7 @@ export default class Content {
         const megold: Megoldás = new Megoldás("jarmu.txt");
 
         // 2. feladat
-        res.write(`2. feladat: Legalább ${megold.dolgozottÓrákSzáma} óra hosszat dolgoztak\n`);
+        res.write(`2. feladat: Legalább ${megold.dolgozottÓrákSzáma} óra hosszat dolgoztak\n\n`);
 
         // 3. feladat
         const óraStatMap: Map<number, string> = megold.óraStatMap;
@@ -37,15 +37,18 @@ export default class Content {
         for (const [key, value] of óraStatMap) {
             res.write(`\t${key} óra: ${value}\n`);
         }
+        res.write("\n");
         // 4. feladat
         const kategóriaStatMap: Map<string, number> = megold.kategóriaStatMap;
         res.write("4. feladat:\n");
         for (const [key, value] of kategóriaStatMap) {
             res.write(`\t${key}: ${value}\n`);
         }
+        res.write("\n");
         // 5. feladat
         res.write(`5. feladat: A leghosszabb forgalommentes időszak: ${megold.leghosszabbForgalommentesIdőszak}\n`);
 
+        res.write("\n");
         // 6. feladat
         let inputRendszam: string = params.inputRendszam as string;
         if (inputRendszam.length < 7) {
@@ -53,7 +56,7 @@ export default class Content {
                 inputRendszam += "*";
             } while (inputRendszam.length < 7);
         }
-        res.write(`6. feladat: Adjon meg egy rendszámot [ 7 karakter legyen, pl.: HU*****]: <input type='text' name='inputRendszam' value='${inputRendszam}' style='max-width:100px;' maxlength="7" onChange='this.form.submit();'>\n`);
+        res.write(`6. feladat: Adjon meg egy rendszámot [7 karakter legyen, pl.: HU*****]: <input type='text' name='inputRendszam' value='${inputRendszam}' style='max-width:100px;' maxlength="7" onChange='this.form.submit();'>\n`);
         const egyezőRendszámok: string[] = megold.rendszámAzonosítás(inputRendszam);
         res.write("<textarea rows='10' cols='8'>");
         for (const i of egyezőRendszámok) {
@@ -61,6 +64,7 @@ export default class Content {
         }
         res.write("</textarea>\n");
 
+        res.write("\n");
         // 7. feladat
         megold.ellenőrzöttJárművekÁllománybaÍrása("vizsgalt.txt");
         const ellenőrzöttJárművek: string[] = megold.ellenőrzöttJárművekKiíratás;
