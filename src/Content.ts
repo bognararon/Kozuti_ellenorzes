@@ -29,7 +29,7 @@ export default class Content {
         const megold: Megoldás = new Megoldás("jarmu.txt");
 
         // 2. feladat
-        res.write(`2. feladat: Legalább ${megold.dolgozottÓrákSzáma} óra hosszat dolgoztak\n\n`);
+        res.write(`2. feladat:\n\tLegalább ${megold.dolgozottÓrákSzáma} óra hosszat dolgoztak\n\n`);
 
         // 3. feladat
         const óraStatMap: Map<number, string> = megold.óraStatMap;
@@ -46,7 +46,7 @@ export default class Content {
         }
         res.write("\n");
         // 5. feladat
-        res.write(`5. feladat: A leghosszabb forgalommentes időszak: ${megold.leghosszabbForgalommentesIdőszak}\n`);
+        res.write(`5. feladat:\n\tA leghosszabb forgalommentes időszak: ${megold.leghosszabbForgalommentesIdőszak}\n`);
 
         res.write("\n");
         // 6. feladat
@@ -58,7 +58,7 @@ export default class Content {
             } while (inputRendszam.length < 7);
         }
         inputRendszam = inputRendszam.toUpperCase();
-        res.write(`6. feladat: Adjon meg egy rendszámot [7 karakter legyen, pl.: HU*****]: <input type='text' name='inputRendszam' value='${inputRendszam}' style='max-width:100px;' maxlength="7" onChange='this.form.submit();'>\n`);
+        res.write(`6. feladat: Adjon meg egy rendszámot [7 karakter lehet, pl.: HU*****]: <input type='text' name='inputRendszam' value='${inputRendszam}' style='max-width:100px;' maxlength="7" onChange='this.form.submit();'>\n`);
         const egyezőRendszámok: string[] = megold.rendszámAzonosítás(inputRendszam);
         res.write("<textarea rows='10' cols='8'>");
         for (const i of egyezőRendszámok) {
@@ -76,6 +76,10 @@ export default class Content {
             res.write(`${i}\n`);
         }
         res.write("</textarea>");
+
+        res.write("\n\n");
+        res.write("<a href='https://github.com/bognararon/Kozuti_ellenorzes' target='_blank'>Github link</a>\t");
+        res.write("<a href='https://kozuti-ellenorzes.herokuapp.com/' target='_blank'>Heroku link</a>");
 
         // <---- Fejezd be a kódolást
 
